@@ -1,0 +1,176 @@
+WEEK 2 
+
+
+exercise 1
+
+MariaDB [flight_game)> select * from goal;
++----+--------+-----------------------------+------+---------+-----------------+-----------------+-------------+
+| id | name   | description                 | icon | target  | target_minvalue | target_maxvalue | target_text |
++----+--------+-----------------------------+------+---------+-----------------+-----------------+-------------+
+|  1 | HOT    | Temperature over +25C       | 01d  | TEMP    |           25.00 |         9999.00 | NULL        |
+|  2 | COLD   | Temperature under -20C      | 13d  | TEMP    |        -9999.00 |          -20.00 | NULL        |
+|  3 | 0DEG   | Temperature exactly 0C      | 04d  | TEMP    |           -0.50 |            0.50 | NULL        |
+|  4 | 10DEG  | Temperature exactly +10C    | 04d  | TEMP    |            9.50 |           10.50 | NULL        |
+|  5 | 20DEG  | Temperature exactly +20C    | 04d  | TEMP    |           19.50 |           20.50 | NULL        |
+|  6 | CLEAR  | Clear skies                 | 01d  | WEATHER |            NULL |            NULL | Clear       |
+|  7 | CLOUDS | Cloudy                      | 04d  | WEATHER |            NULL |            NULL | Clouds      |
+|  8 | WINDY  | Wind blows more than 10 m/s | 04d  | WIND    |           10.00 |         9999.00 | NULL        |
++----+--------+-----------------------------+------+---------+-----------------+-----------------+-------------+
+8 rows in set (0.003 sec)
+
+
+exercise 2
+
+MariaDB [flight_game)> select name from airport where iso_country = "FI";
++------------------------------------------+----------------+
+| name                                     | type           |
++------------------------------------------+----------------+
+| Aavahelukka Airport                      | small_airport  |
+| Ahmosuo Airport                          | small_airport  |
+| Alavus Airfield                          | small_airport  |
+| Jorvin Hospital Heliport                 | heliport       |
+| Kilpisj?rvi Heliport                     | heliport       |
+| Enontekio Airport                        | medium_airport |
+| Eura Airport                             | small_airport  |
+117 rows in set (0.011 sec)
+
+
+exercise 3 
+
+MariaDB [flight_game)> select name from airport where iso_country = "FI" order by name asc;
++------------------------------------------+
+| name                                     |
++------------------------------------------+
+| ?ht?ri Airfield                          |
+| Aavahelukka Airport                      |
+| Ahmosuo Airport                          |
+| Alavus Airfield                          |
+| Central Finland Central Hospital Helipor |
+| Enontekio Airport                        |
+| Eura Airport                             |
+| Forssa Airfield                          |
+| Genb?le Airport                          |
+| H?meenkyr? Airfield                      |
+| Haapaj?rvi Airport                       |
+| Haapam?ki Airfield                       |
+117 rows in set (0.002 sec)
+
+
+exercise 4
+
+MariaDB [flight_game]> select name, type from airport where iso_country = "FI" order by type, name;
++------------------------------------------+----------------+
+| name                                     | type           |
++------------------------------------------+----------------+
+| Haapaj?rvi Airport                       | closed         |
+| Haapam?ki Airfield                       | closed         |
+| Hangasj?rvi Airstrip                     | closed         |
+| Helsinki Malmi Airport                   | closed         |
+| Sonkaj?rvi-Jyrkk? Airfield               | closed         |
+| Teisko Airfield                          | closed         |
+| Central Finland Central Hospital Helipor | heliport       |
+| Hernesaari Heliport                      | heliport       |
+| Jorvin Hospital Heliport                 | heliport       |
+| Kanta-H?meen Central Hospital Heliport   | heliport       |
+| Kilpisj?rvi Heliport                     | heliport       |
+| Kuopio University Hospital Heliport      | heliport       |
+| Lapland Central Hospital Heliport        | heliport       |
+| Meilahti Hospital Helipad                | heliport       |
+| North Karelia Central Hospital Heliport  | heliport       |
+| Oulun University Hospital Heliport       | heliport       |
+| P?ij?t-H?meen Central Hospital Heliport  | heliport       |
+| Peijaksen Hospital Heliport              | heliport       |
+| Sein?joen Central Hospital Heliport      | heliport       |
+| Tampere University Hospital Heliport     | heliport       |
+| Turku University Central Hospital Helipo | heliport       |
+| Helsinki Vantaa Airport                  | large_airport  |
+| Enontekio Airport                        | medium_airport |
+| Halli Airport                            | medium_airport |
+| Helsinki East-Redstone Airport           | medium_airport |
+117 rows in set (0.002 sec)
+
+exercise 5
+
+MariaDB [flight_game)> select name from country where name like "%F%";
++-----------------------------+
+| name                        |
++-----------------------------+
+| Finland                     |
+| Fiji                        |
+| Falkland Islands            |
+| Faroe Islands               |
+| France                      |
+| French Guiana               |
+| French Polynesia            |
+| French Southern Territories |
++-----------------------------+
+8 rows in set (0.005 sec)
+
+
+exercise 6
+MariaDB [flight_game]> select name from country where name like "%f%";
++-----------------------------+
+| name                        |
++-----------------------------+
+| Afghanistan                 |
+| Burkina Faso                |
+| Central African Republic    |
+| Finland                     |
+| Fiji                        |
+| Falkland Islands            |
+| Faroe Islands               |
+| France                      |
+| French Guiana               |
+| Isle of Man                 |
+| Norfolk Island              |
+| French Polynesia            |
+| French Southern Territories |
+| Wallis and Futuna           |
+| South Africa                |
++-----------------------------+
+15 rows in set (0.002 sec)
+
+
+exercise 7
+
+MariaDB [flight_game]> select location from game where screen_name = "Vesa";
++----------+
+| location |
++----------+
+| EGCC     |
++----------+
+1 row in set (0.005 sec)
+
+
+exercise 8
+
+MariaDB [flight_game]> select co2_consumed from game where screen_name = "Ilkka";
++--------------+
+| co2_consumed |
++--------------+
+|         8000 |
++--------------+
+1 row in set (0.002 sec)
+
+
+exercise 9
+
+MariaDB [flight_game]> select co2_budget from game limit 1;
++------------+
+| co2_budget |
++------------+
+|      10000 |
++------------+
+1 row in set (0.003 sec)
+
+
+exercise 10
+
+MariaDB [flight_game]> select screen_name, co2_budget, co2_consumed, (co2_budget - co2_consumed) as co2_left from ga
+me where screen_name = "Ilkka";
++-------------+------------+--------------+----------+
+| screen_name | co2_budget | co2_consumed | co2_left |
++-------------+------------+--------------+----------+
+| Ilkka       |      10000 |         8000 |     2000 |
++-------------+------------+--------------+----------+
+1 row in set (0.001 sec)
