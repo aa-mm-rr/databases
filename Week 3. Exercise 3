@@ -1,0 +1,154 @@
+Week 3, Exercise 3
+Question 1
+MariaDB [flight_game]> select country.name as "country name", airport.name as "airport name"
+    -> from airport, country
+    -> where airport.iso_country = country.iso_country and country.name = "Iceland";
++--------------+--------------------------------+
+| country name | airport name                   |
++--------------+--------------------------------+
+| Iceland      | Arnger?areyri Airport          |
+| Iceland      | ?lftaver Airport               |
+| Iceland      | Akureyri Airport               |
+| Iceland      | Bakki Airport                  |
+| Iceland      | Bildudalur Airport             |
+| Iceland      | Borgarfj?r?ur eystri Airport   |
+| Iceland      | Baeir Airport                  |
+| Iceland      | Bakkafj?r?ur Airport           |
+| Iceland      | Hjaltabakki Airport            |
+| Iceland      | B??ardalur Airport             |
+| Iceland      | Brei?dalsv?k Airport           |
+| Iceland      | Dagver?ar? Airport             |
+| Iceland      | Dj?pivogur Airport             |
+| Iceland      | Egilssta?ir Airport            |
+
+Question 2
+MariaDB [flight_game]> select airport.name as "airport name"
+    -> from airport, country
+    -> where airport.iso_country = country.iso_country and country.name = "France" and airport.type = "large_airport";
++------------------------------------------+
+| airport name                             |
++------------------------------------------+
+| Bordeaux-M?rignac Airport                |
+| Toulouse-Blagnac Airport                 |
+| Lyon Saint-Exup?ry Airport               |
+| Marseille Provence Airport               |
+| Nice-C?te d'Azur Airport                 |
+| Charles de Gaulle International Airport  |
+| Paris-Orly Airport                       |
+| EuroAirport Basel-Mulhouse-Freiburg Airp |
++------------------------------------------+
+8 rows in set (0.024 sec)
+
+
+Question 3
+MariaDB [flight_game]> select country.name as country_name, airport.name as airport.name
+from airport, country
+where airport.iso_country = country.iso_country and country.continent = "AN";
++--------------+------------------------------------------+
+| country_name | airport.name                             |
++--------------+------------------------------------------+
+| Antarctica   | Rothera Point Airport                    |
+| Antarctica   | Novolazarevskaya Station                 |
+| Antarctica   | Troll Airfield                           |
+| Antarctica   | Gonz?lez Videla Antarctic Base           |
+| Antarctica   | Ellsworth Station                        |
+| Antarctica   | Jack F. Paulus Skiway                    |
+| Antarctica   | Palmer Station Heliport                  |
+| Antarctica   | Enigma Lake Skiway                       |
+| Antarctica   | Machu Picchu Base Helipad                |
+| Antarctica   | Comandante Ferraz Antarctic Station Heli |
+
+
+Question 4
+
+MariaDB [flight_game]> select elevation_ft
+    -> from airport, game
+    -> where location = ident and screen_name = "Heini";
++--------------+
+| elevation_ft |
++--------------+
+|          179 |
++--------------+
+1 row in set (0.009 sec)
+
+
+Question 5
+
+MariaDB [flight_game]> select elevation_ft * 0.3048 as elevation_m
+    -> from airport, game
+    -> where location = ident and screen_name = "Heini";
++-------------+
+| elevation_m |
++-------------+
+|     54.5592 |
++-------------+
+1 row in set (0.002 sec)
+
+
+Question 6
+
+MariaDB [flight_game]> select name
+    -> from airport, game
+    -> where location = ident and screen_name = "Ilkka";
++------------------------+
+| name                   |
++------------------------+
+| London Gatwick Airport |
++------------------------+
+1 row in set (0.001 sec)
+
+Question 7
+
+MariaDB [flight_game]> select country.name
+    -> from airport, country, game
+    -> where location = ident and airport.iso_country = country.iso_country  and screen_name = "Ilkka";
++----------------+
+| name           |
++----------------+
+| United Kingdom |
++----------------+
+1 row in set (0.001 sec)
+
+
+Question 8
+MariaDB [flight_game]> select name
+    -> from goal, goal_reached, game
+    -> where game.id = game_id and goal.id = goal_id and screen_name = "Heini";
++--------+
+| name   |
++--------+
+| 10DEG  |
+| CLOUDS |
++--------+
+2 rows in set (0.014 sec)
+
+
+Question 9
+MariaDB [flight_game]> select airport.name
+    -> from airport, game, goal, goal_reached
+    -> where ident = location and game.id = game_id and goal.id = goal_id and screen_name = "Ilkka" and goal.name = "CLOUDS";
++------------------------+
+| name                   |
++------------------------+
+| London Gatwick Airport |
++------------------------+
+1 row in set (0.001 sec)
+
+
+Question 10
+MariaDB [flight_game]> select country.name
+    -> from country, game, goal, goal_reached, airport
+    -> where airport.iso_country = country.iso_country and ident = location and game.id = game_id and goal.id = goal.id and screen_name = 'Ilkka';
++----------------+
+| name           |
++----------------+
+| United Kingdom |
+| United Kingdom |
+| United Kingdom |
+| United Kingdom |
+| United Kingdom |
+| United Kingdom |
+| United Kingdom |
+| United Kingdom |
++----------------+
+8 rows in set (0.001 sec)
