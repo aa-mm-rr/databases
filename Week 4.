@@ -1,0 +1,101 @@
+Question 1
+
+MariaDB [flight_game]> select country.name as "country name", airport.name as "airport name"
+    -> from country inner join airport on airport.iso_country = country.iso_country
+    -> where country.name = "Finland" and scheduled_service = "yes";
++--------------+-----------------------------+
+| country name | airport name                |
++--------------+-----------------------------+
+| Finland      | Enontekio Airport           |
+| Finland      | Helsinki Vantaa Airport     |
+| Finland      | Ivalo Airport               |
+| Finland      | Joensuu Airport             |
+| Finland      | Jyv?skyl? Airport           |
+| Finland      | Kemi-Tornio Airport         |
+| Finland      | Kajaani Airport             |
+| Finland      | Kokkola-Pietarsaari Airport |
+| Finland      | Kuusamo Airport             |
+| Finland      | Kittil? Airport             |
+| Finland      | Kuopio Airport              |
+| Finland      | Lappeenranta Airport        |
+| Finland      | Mariehamn Airport           |
+| Finland      | Oulu Airport                |
+| Finland      | Pori Airport                |
+| Finland      | Rovaniemi Airport           |
+| Finland      | Savonlinna Airport          |
+| Finland      | Sein?joki Airport           |
+| Finland      | Tampere-Pirkkala Airport    |
+| Finland      | Turku Airport               |
+| Finland      | Vaasa Airport               |
+| Finland      | Varkaus Airport             |
++--------------+-----------------------------+
+22 rows in set (0.035 sec)
+
+
+Question 2
+
+MariaDB [flight_game]> select screen_name, airport.name
+    -> from game inner join airport on location = ident;
++-------------+-------------------------+
+| screen_name | name                    |
++-------------+-------------------------+
+| Heini       | Helsinki Vantaa Airport |
+| Vesa        | Manchester Airport      |
+| Ilkka       | London Gatwick Airport  |
++-------------+-------------------------+
+3 rows in set (0.001 sec)
+
+
+Question 3
+MariaDB [flight_game]> select screen_name, country.name
+    -> from game inner join airport on location = ident inner join country on airport.iso_country = country.iso_country;
++-------------+----------------+
+| screen_name | name           |
++-------------+----------------+
+| Heini       | Finland        |
+| Vesa        | United Kingdom |
+| Ilkka       | United Kingdom |
++-------------+----------------+
+3 rows in set (0.002 sec)
+
+
+Question 4
+
+MariaDB [flight_game]> select airport.name, screen_name
+    -> from airport left join game on ident = location where name like "%Hels%";
++---------------------------------------+-------------+
+| name                                  | screen_name |
++---------------------------------------+-------------+
+| Winchelsea Airport                    | NULL        |
+| Reichelsheim Airport                  | NULL        |
+| Flugplatz Michelstadt/Odenwald        | NULL        |
+| Helsinki Malmi Airport                | NULL        |
+| Helsinki Vantaa Airport               | Heini       |
+| Helsinki East-Redstone Airport        | NULL        |
+| ?ngelholm-Helsingborg Airport         | NULL        |
+| Shelsley-Beauchamp Airstrip           | NULL        |
+| Michels Avia??o Agr?cola LTDA Airport | NULL        |
+| Michels Farms Airport                 | NULL        |
++---------------------------------------+-------------+
+10 rows in set (0.080 sec)
+
+
+Question 5
+
+MariaDB [flight_game]> select name, screen_name
+    -> from goal left join goal_reached on goal.id = goal_id  left join game on game.id = game_id;
++--------+-------------+
+| name   | screen_name |
++--------+-------------+
+| HOT    | NULL        |
+| COLD   | NULL        |
+| 0DEG   | NULL        |
+| 10DEG  | Heini       |
+| 10DEG  | Vesa        |
+| 20DEG  | NULL        |
+| CLEAR  | NULL        |
+| CLOUDS | Heini       |
+| CLOUDS | Ilkka       |
+| WINDY  | NULL        |
++--------+-------------+
+10 rows in set (0.002 sec)
